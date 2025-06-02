@@ -1,42 +1,9 @@
 [package]
 name = "widow"
 version = "0.1.0"
-edition = "2021"
-authors = ["Widow Language"]
-description = "The Widow programming language"
-repository = "https://github.com/rayone121/widow"
-license = "MIT"
+edition = "2024"
 
 [dependencies]
-# Parsing
 pest = "2.7"
 pest_derive = "2.7"
-logos = "0.13"
-
-# Error handling
-thiserror = "1.0"
-anyhow = "1.0"
-
-# Data structures
-indexmap = "2.1"
-rustc-hash = "1.1"
-
-# CLI
-clap = { version = "4.4", features = ["derive"] }
-colored = "2.0"
-
-# Bytecode VM
-byteorder = "1.5"
-memmap2 = "0.9"
-
-[dev-dependencies]
-pretty_assertions = "1.4"
-criterion = "0.5"
-
-[[bin]]
-name = "widow"
-path = "src/main.rs"
-
-[lib]
-name = "widow_lib"
-path = "src/lib.rs"
+lazy_static = "1.4"

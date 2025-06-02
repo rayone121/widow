@@ -1,196 +1,113 @@
-use std::fs;
-use std::path::PathBuf;
-use std::process;
-
-use clap::{Parser, Subcommand};
-use colored::Colorize;
-use widow_lib::memory::MemoryManager;
-use widow_lib::{interpreter, lexer, parser};
-
-#[derive(Parser)]
-#[command(name = env!("CARGO_PKG_NAME"))]
-#[command(about = env!("CARGO_PKG_DESCRIPTION"))]
-#[command(version = env!("CARGO_PKG_VERSION"))]
-struct Cli {
-    #[command(subcommand)]
-    command: Option<Commands>,
-
-    /// Input file to run
-    #[arg(value_name = "FILE")]
-    file: Option<PathBuf>,
-
-    /// Show verbose output
-    #[arg(short, long)]
-    verbose: bool,
-}
-
-#[derive(Subcommand)]
-enum Commands {
-    /// Run a Widow source file
-    Run {
-        /// Input file
-        file: PathBuf,
-        /// Show verbose output
-        #[arg(short, long)]
-        verbose: bool,
-    },
-    /// Compile source to bytecode
-    Compile {
-        /// Input file
-        file: PathBuf,
-        /// Output file (defaults to input.wdb)
-        #[arg(short, long)]
-        output: Option<PathBuf>,
-    },
-    /// Run compiled bytecode
-    Execute {
-        /// Bytecode file
-        file: PathBuf,
-    },
-    /// Compile to native executable
-    Native {
-        /// Input file
-        file: PathBuf,
-        /// Output executable name
-        #[arg(short, long)]
-        output: Option<PathBuf>,
-    },
-}
+use widow::parser;
 
 fn main() {
-    let cli = Cli::parse();
-
-    match cli.command {
-        Some(Commands::Run { file, verbose }) => {
-            run_file(file, verbose);
+    let source = r#"
+        # Comprehensive test of all grammar features
+        
+        # Variable declarations with different types
+        let x: i32 = 5 + 3 * (2 - 1);
+        let y: f64 = (10.5 + 3.7) / 2.0;
+        let isValid: bool = true;
+        let name: String = "Hello World";
+        let count = 42;
+        let flag = false;
+        
+        # Constants with various types
+        const PI: f64 = 3.14159;
+        const MAX_SIZE: i32 = 1000;
+        const DEBUG: bool = true;
+        const MESSAGE: String = "System Ready";
+        
+        # Simple function with single return
+        func add(a: i32, b: i32) -> i32 {
+            let temp: i32 = a + b;
+            ret temp;
         }
-        Some(Commands::Compile { file, output }) => {
-            compile_to_bytecode(file, output);
+        
+        # Function with multiple returns
+        func calculate(a: i32, b: i32) -> (i32, bool) {
+            let result: i32 = a * b + 10;
+            let isPositive: bool = result > 0;
+            ret result, isPositive;
         }
-        Some(Commands::Execute { file }) => {
-            execute_bytecode(file);
+        
+        # Function with no return type
+        func printMessage(msg: String) {
+            ret;
         }
-        Some(Commands::Native { file, output }) => {
-            compile_to_native(file, output);
+        
+        # Struct definition
+        struct Person {
+            name: String,
+            age: i32,
+            active: bool
         }
-        None => {
-            if let Some(file) = cli.file {
-                run_file(file, cli.verbose);
-            } else {
-                eprintln!(
-                    "{} No file specified. Use --help for usage information.",
-                    "Error:".bright_red()
-                );
-                process::exit(1);
+        
+        # Implementation block
+        impl Person {
+            func getName(self: Person) -> String {
+                ret self.name;
+            }
+            
+            func setAge(self: Person, newAge: i32) {
+                self.age = newAge;
             }
         }
+        
+        # Arrays with different expressions
+        let numbers: [i32] = [1, 2, 3, (x + y), add(5, 3)];
+        let names: [String] = ["Alice", "Bob", "Charlie"];
+        let flags: [bool] = [true, false, (x > 0)];
+        
+        # Maps with various key-value types
+        let config: {String: i32} = {"width": 800, "height": 600, "depth": (x * 2)};
+        let userData: {String: String} = {"name": "John", "city": "NYC"};
+        
+        # Function calls with complex expressions
+        let result1: i32 = add(x + 5, y * 2);
+        let result2: i32 = add(add(1, 2), add(3, 4));
+        
+        # Control flow - if statements
+        if x > 0 {
+            let positive: bool = true;
+        } elif x < 0 {
+            let negative: bool = true;
+        } else {
+            let zero: bool = true;
+        }
+        
+        # For loops
+        for i in numbers {
+            let processed: i32 = i * 2;
+        }
+        
+        for item in 1..10 {
+            let squared: i32 = item * item;
+        }
+        
+        # Switch statements
+        switch x {
+            case 0, 1:
+                let small: bool = true;
+            case 5:
+                let medium: bool = true;
+            default:
+                let large: bool = true;
+        }
+        
+        # Complex expressions with all operators
+        let complexResult: i32 = ((x + y) * 2 - 5) / (add(3, 4) + 1);
+        let comparison: bool = (x >= y) && (result1 != result2);
+        
+        # Nested function calls and expressions
+        let finalResult: i32 = add(calculate(x, y).0, add(x * 2, y + 3));
+        
+        # Return statements in main scope
+        ret finalResult;
+    "#;
+
+    match parser::parse_source(source) {
+        Ok(_) => println!("Parse successful!"),
+        Err(e) => println!("Parse error: {:#?}", e),
     }
-}
-
-fn run_file(file_path: PathBuf, verbose: bool) {
-    if verbose {
-        println!(
-            "{} Running Widow file: {}",
-            "Info:".bright_blue(),
-            file_path.display()
-        );
-    }
-
-    if !file_path.exists() {
-        eprintln!(
-            "{} File not found: {}",
-            "Error:".bright_red(),
-            file_path.display()
-        );
-        process::exit(1);
-    }
-
-    // Read the source code
-    let source = match fs::read_to_string(&file_path) {
-        Ok(content) => {
-            if verbose {
-                println!("📄 File read successfully, {} bytes", content.len());
-                println!("📄 Source code:");
-                println!("'{}'", content);
-                println!("{}", "─".repeat(50));
-            }
-            content
-        }
-        Err(err) => {
-            eprintln!("{} Failed to read file: {}", "Error:".bright_red(), err);
-            process::exit(1);
-        }
-    };
-
-    // Tokenize the source code
-    let tokens = match lexer::tokenize(&source) {
-        Ok(tokens) => {
-            if verbose {
-                println!("✓ Tokenization successful ({} tokens)", tokens.len());
-            }
-            tokens
-        }
-        Err(err) => {
-            eprintln!("{} Tokenization failed: {}", "Error:".bright_red(), err);
-            process::exit(1);
-        }
-    };
-
-    // Parse tokens into AST
-    let ast = match parser::parse(tokens) {
-        Ok(ast) => {
-            if verbose {
-                println!("✓ Parsing successful ({} statements)", ast.statements.len());
-            }
-            ast
-        }
-        Err(err) => {
-            eprintln!("{} Parsing failed: {}", "Error:".bright_red(), err);
-            process::exit(1);
-        }
-    };
-
-    // Create memory manager for interpretation
-    let mut memory = MemoryManager::new();
-
-    // Execute the program
-    if verbose {
-        println!("🚀 Executing program...");
-    }
-
-    match interpreter::interpret_program(&ast, &mut memory) {
-        Ok(_) => {
-            if verbose {
-                println!("{} Program executed successfully", "Success:".green());
-            }
-        }
-        Err(err) => {
-            eprintln!("{} {}", "Runtime error:".bright_red(), err);
-            process::exit(1);
-        }
-    }
-}
-
-fn compile_to_bytecode(file_path: PathBuf, output: Option<PathBuf>) {
-    eprintln!(
-        "{} Bytecode compilation not yet implemented",
-        "Error:".bright_red()
-    );
-    process::exit(1);
-}
-
-fn execute_bytecode(file_path: PathBuf) {
-    eprintln!(
-        "{} Bytecode execution not yet implemented",
-        "Error:".bright_red()
-    );
-    process::exit(1);
-}
-
-fn compile_to_native(file_path: PathBuf, output: Option<PathBuf>) {
-    eprintln!(
-        "{} Native compilation not yet implemented",
-        "Error:".bright_red()
-    );
-    process::exit(1);
 }

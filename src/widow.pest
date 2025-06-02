@@ -1,0 +1,99 @@
+WHITESPACE  = _{ " " | "\t" | NEWLINE }
+NEWLINE     = _{ "\r\n" | "\n" }
+COMMENT     = _{ "#" ~ (!NEWLINE ~ ANY)* }
+program     = { SOI ~ statement* ~ EOI }
+statement   = { WHITESPACE* ~ (const_decl | func_decl | struct_decl | impl_decl | return_stmt | variable_decl | assignment_stmt | control_flow | expr_stmt) ~ ";"? ~ WHITESPACE* }
+
+//////////////////////
+// Declarations
+//////////////////////
+variable_decl = { "let" ~ identifier ~ (":" ~ type_name)? ~ "=" ~ expression }
+const_decl    = { "const" ~ identifier ~ ":" ~ type_name ~ "=" ~ expression }
+type_name     = { primitive_type | array_type | map_type | identifier }
+primitive_type = @{ "i8" | "i16" | "i32" | "i64" | "i128" | "isize" | "u8" | "u16" | "u32" | "u64" | "u128" | "usize" | "f32" | "f64" | "bool" | "char" | "String" | "Error" }
+array_type    = { "[" ~ type_name ~ "]" }
+map_type      = { "{" ~ type_name ~ ":" ~ type_name ~ "}" | ("HashMap" ~ "<" ~ type_name ~ "," ~ WHITESPACE* ~ type_name ~ ">") }
+
+//////////////////////
+// Functions
+//////////////////////
+func_decl     = { "func" ~ identifier ~ "(" ~ func_params? ~ ")" ~ return_type? ~ block }
+func_params   = { func_param ~ ("," ~ WHITESPACE* ~ func_param)* ~ ","? }
+func_param    = { identifier ~ ":" ~ type_name }
+return_type   = { "->" ~ (type_name | ("(" ~ type_name ~ ("," ~ WHITESPACE* ~ type_name)* ~ ")")) }
+
+//////////////////////
+// Structs & Implementation
+//////////////////////
+struct_decl   = { "struct" ~ identifier ~ "{" ~ NEWLINE? ~ (WHITESPACE* ~ struct_field ~ ("," | NEWLINE)? ~ NEWLINE?)* ~ WHITESPACE* ~ "}" }
+struct_field  = { identifier ~ ":" ~ type_name }
+impl_decl     = { "impl" ~ identifier ~ block }
+
+//////////////////////
+// Control Flow
+//////////////////////
+control_flow  = { if_stmt | for_loop | while_loop | switch_stmt }
+if_stmt       = { "if" ~ WHITESPACE* ~ expression ~ block ~ ("elif" ~ WHITESPACE* ~ expression ~ block)* ~ ("else" ~ block)? }
+for_loop      = { "for" ~ WHITESPACE* ~ (for_range | expression) ~ WHITESPACE* ~ block }
+for_range     = { identifier ~ WHITESPACE* ~ "in" ~ WHITESPACE* ~ expression }
+while_loop    = { "while" ~ WHITESPACE* ~ expression ~ block }
+switch_stmt   = { "switch" ~ WHITESPACE* ~ expression ~ "{" ~ NEWLINE? ~ (WHITESPACE* ~ case_clause ~ NEWLINE?)* ~ WHITESPACE* ~ "}" }
+case_clause   = { (("case" ~ WHITESPACE* ~ value_list) | "default") ~ ":" ~ statement_list }
+value_list    = { literal ~ ("," ~ WHITESPACE* ~ literal)* }
+statement_list = { statement* }
+
+//////////////////////
+// Blocks & Statements
+//////////////////////
+block           = { "{" ~ NEWLINE? ~ (WHITESPACE* ~ statement ~ NEWLINE?)* ~ WHITESPACE* ~ "}" }
+assignment_stmt = { postfix_expr ~ "=" ~ expression }
+return_stmt     = { "ret" ~ WHITESPACE* ~ (expression ~ ("," ~ WHITESPACE* ~ expression)*)? }
+expr_stmt       = { expression }
+
+//////////////////////
+// Expressions (Proper Precedence)
+//////////////////////
+expression = { logical_or }
+
+logical_or  = { logical_and ~ ("||" ~ logical_and)* }
+logical_and = { equality ~ ("&&" ~ equality)* }
+equality    = { comparison ~ (("==" | "!=") ~ comparison)* }
+comparison  = { range ~ (("<=" | ">=" | "<" | ">") ~ range)* }
+range       = { addition ~ (".." ~ addition)* }
+addition    = { multiplication ~ (("+" | "-") ~ multiplication)* }
+multiplication = { unary ~ (("*" | "/" | "%") ~ unary)* }
+unary       = { ("!" | "-")* ~ postfix }
+postfix     = { primary ~ postfix_op* }
+postfix_op  = { function_call_op | field_access_op | array_access_op }
+function_call_op = { "(" ~ (expression ~ ("," ~ WHITESPACE* ~ expression)*)? ~ ")" }
+field_access_op = { "." ~ (identifier | number) }
+array_access_op = { "[" ~ expression ~ "]" }
+
+primary = { literal | grouped_expr | array_literal | map_literal | identifier }
+
+// Separate postfix expression for assignment targets
+postfix_expr = { identifier ~ postfix_suffix* }
+postfix_suffix = { field_access_op | array_access_op }
+
+grouped_expr  = { "(" ~ expression ~ ")" }
+array_literal = { "[" ~ (expression ~ ("," ~ WHITESPACE* ~ expression)* ~ ","?)? ~ "]" }
+map_literal   = { "{" ~ (map_entry ~ ("," ~ WHITESPACE* ~ map_entry)* ~ ","?)? ~ "}" }
+map_entry     = { expression ~ ":" ~ WHITESPACE* ~ expression }
+
+//////////////////////
+// Literals & Tokens
+//////////////////////
+literal       = { string | char | number | boolean | "nil" }
+identifier    = @{ !keyword ~ (ASCII_ALPHA | "_") ~ (ASCII_ALPHANUMERIC | "_")* }
+number        = @{ ASCII_DIGIT+ ~ ("." ~ ASCII_DIGIT+)? ~ (("e" | "E") ~ ("+" | "-")? ~ ASCII_DIGIT+)? }
+string        = @{ "\"" ~ (!"\"" ~ (escape_sequence | ANY))* ~ "\"" }
+char          = @{ "'" ~ (escape_sequence | (!"'" ~ ANY)) ~ "'" }
+boolean       = @{ "true" | "false" }
+escape_sequence = @{ "\\" ~ ("n" | "r" | "t" | "\\" | "\"" | "'" | "0") }
+
+// Reserved keywords to prevent identifier conflicts
+keyword = @{
+    "let" | "const" | "func" | "struct" | "impl" | "if" | "elif" | "else" |
+    "for" | "while" | "in" | "switch" | "case" | "default" | "ret" | "true" |
+    "false" | "nil" | primitive_type
+}

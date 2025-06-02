@@ -1,0 +1,121 @@
+DEBUG: Matched pair: statement => "let x: i32 = 5 + 3 * (2 - 1);\n        "
+DEBUG: Statement inner pairs:
+  variable_decl => "let x: i32 = 5 + 3 * (2 - 1)"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "let y: f64 = (10.5 + 3.7) / 2.0;\n        "
+DEBUG: Statement inner pairs:
+  variable_decl => "let y: f64 = (10.5 + 3.7) / 2.0"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "let isValid: bool = true;\n        "
+DEBUG: Statement inner pairs:
+  variable_decl => "let isValid: bool = true"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "let name: String = \"Hello World\";\n        "
+DEBUG: Statement inner pairs:
+  variable_decl => "let name: String = \"Hello World\""
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "let count = 42;\n        "
+DEBUG: Statement inner pairs:
+  variable_decl => "let count = 42"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "let flag = false;\n        \n        # Constants with various types\n        "
+DEBUG: Statement inner pairs:
+  variable_decl => "let flag = false"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "const PI: f64 = 3.14159;\n        "
+DEBUG: Statement inner pairs:
+  const_decl => "const PI: f64 = 3.14159"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "const MAX_SIZE: i32 = 1000;\n        "
+DEBUG: Statement inner pairs:
+  const_decl => "const MAX_SIZE: i32 = 1000"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "const DEBUG: bool = true;\n        "
+DEBUG: Statement inner pairs:
+  const_decl => "const DEBUG: bool = true"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "const MESSAGE: String = \"System Ready\";\n        \n        # Simple function with single return\n        "
+DEBUG: Statement inner pairs:
+  const_decl => "const MESSAGE: String = \"System Ready\""
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "func add(a: i32, b: i32) -> i32 {\n            let temp: i32 = a + b;\n            ret temp;\n        }\n        \n        # Function with multiple returns\n        "
+DEBUG: Statement inner pairs:
+  func_decl => "func add(a: i32, b: i32) -> i32 {\n            let temp: i32 = a + b;\n            ret temp;\n        }"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "func calculate(a: i32, b: i32) -> (i32, bool) {\n            let result: i32 = a * b + 10;\n            let isPositive: bool = result > 0;\n            ret result, isPositive;\n        }\n        \n        # Function with no return type\n        "
+DEBUG: Statement inner pairs:
+  func_decl => "func calculate(a: i32, b: i32) -> (i32, bool) {\n            let result: i32 = a * b + 10;\n            let isPositive: bool = result > 0;\n            ret result, isPositive;\n        }"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "func printMessage(msg: String) {\n            ret;\n        }\n        \n        # Struct definition\n        "
+DEBUG: Statement inner pairs:
+  func_decl => "func printMessage(msg: String) {\n            ret;\n        }"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "struct Person {\n            name: String,\n            age: i32,\n            active: bool\n        }\n        \n        # Implementation block\n        "
+DEBUG: Statement inner pairs:
+  struct_decl => "struct Person {\n            name: String,\n            age: i32,\n            active: bool\n        }"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "impl Person {\n            func getName(self: Person) -> String {\n                ret self.name;\n            }\n            \n            func setAge(self: Person, newAge: i32) {\n                self.age = newAge;\n            }\n        }\n        \n        # Arrays with different expressions\n        "
+DEBUG: Statement inner pairs:
+  impl_decl => "impl Person {\n            func getName(self: Person) -> String {\n                ret self.name;\n            }\n            \n            func setAge(self: Person, newAge: i32) {\n                self.age = newAge;\n            }\n        }"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "let numbers: [i32] = [1, 2, 3, (x + y), add(5, 3)];\n        "
+DEBUG: Statement inner pairs:
+  variable_decl => "let numbers: [i32] = [1, 2, 3, (x + y), add(5, 3)]"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "let names: [String] = [\"Alice\", \"Bob\", \"Charlie\"];\n        "
+DEBUG: Statement inner pairs:
+  variable_decl => "let names: [String] = [\"Alice\", \"Bob\", \"Charlie\"]"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "let flags: [bool] = [true, false, (x > 0)];\n        \n        # Maps with various key-value types\n        "
+DEBUG: Statement inner pairs:
+  variable_decl => "let flags: [bool] = [true, false, (x > 0)]"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "let config: {String: i32} = {\"width\": 800, \"height\": 600, \"depth\": (x * 2)};\n        "
+DEBUG: Statement inner pairs:
+  variable_decl => "let config: {String: i32} = {\"width\": 800, \"height\": 600, \"depth\": (x * 2)}"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "let userData: {String: String} = {\"name\": \"John\", \"city\": \"NYC\"};\n        \n        # Function calls with complex expressions\n        "
+DEBUG: Statement inner pairs:
+  variable_decl => "let userData: {String: String} = {\"name\": \"John\", \"city\": \"NYC\"}"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "let result1: i32 = add(x + 5, y * 2);\n        "
+DEBUG: Statement inner pairs:
+  variable_decl => "let result1: i32 = add(x + 5, y * 2)"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "let result2: i32 = add(add(1, 2), add(3, 4));\n        \n        # Control flow - if statements\n        "
+DEBUG: Statement inner pairs:
+  variable_decl => "let result2: i32 = add(add(1, 2), add(3, 4))"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "if x > 0 {\n            let positive: bool = true;\n        } elif x < 0 {\n            let negative: bool = true;\n        } else {\n            let zero: bool = true;\n        }\n        \n        # For loops\n        "
+DEBUG: Statement inner pairs:
+  control_flow => "if x > 0 {\n            let positive: bool = true;\n        } elif x < 0 {\n            let negative: bool = true;\n        } else {\n            let zero: bool = true;\n        }"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "for i in numbers {\n            let processed: i32 = i * 2;\n        }\n        \n        "
+DEBUG: Statement inner pairs:
+  control_flow => "for i in numbers {\n            let processed: i32 = i * 2;\n        }"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "for item in 1..10 {\n            let squared: i32 = item * item;\n        }\n        \n        # Switch statements\n        "
+DEBUG: Statement inner pairs:
+  control_flow => "for item in 1..10 {\n            let squared: i32 = item * item;\n        }"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "switch x {\n            case 0, 1:\n                let small: bool = true;\n            case 5:\n                let medium: bool = true;\n            default:\n                let large: bool = true;\n        }\n        \n        # Complex expressions with all operators\n        "
+DEBUG: Statement inner pairs:
+  control_flow => "switch x {\n            case 0, 1:\n                let small: bool = true;\n            case 5:\n                let medium: bool = true;\n            default:\n                let large: bool = true;\n        }"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "let complexResult: i32 = ((x + y) * 2 - 5) / (add(3, 4) + 1);\n        "
+DEBUG: Statement inner pairs:
+  variable_decl => "let complexResult: i32 = ((x + y) * 2 - 5) / (add(3, 4) + 1)"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "let comparison: bool = (x >= y) && (result1 != result2);\n        \n        # Nested function calls and expressions\n        "
+DEBUG: Statement inner pairs:
+  variable_decl => "let comparison: bool = (x >= y) && (result1 != result2)"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "let finalResult: i32 = add(calculate(x, y).0, add(x * 2, y + 3));\n        \n        # Return statements in main scope\n        "
+DEBUG: Statement inner pairs:
+  variable_decl => "let finalResult: i32 = add(calculate(x, y).0, add(x * 2, y + 3))"
+DEBUG: Unhandled rule: statement
+DEBUG: Matched pair: statement => "ret finalResult;\n    "
+DEBUG: Statement inner pairs:
+  return_stmt => "ret finalResult"
+DEBUG: Unhandled rule: statement
+Parse successful!

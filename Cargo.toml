@@ -2,9 +2,9 @@
 name = "widow"
 version = "0.1.0"
 edition = "2021"
-authors = ["Widow Language Team"]
+authors = ["Widow Language"]
 description = "The Widow programming language"
-repository = "https://github.com/widow-lang/widow"
+repository = "https://github.com/rayone121/widow"
 license = "MIT"
 
 [dependencies]

@@ -1,5 +1,0 @@
-# Test program with multiple print statements
-
-print("Welcome to Widow!")
-print("This is line 2")
-print("Numbers and text work: 42")

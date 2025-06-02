@@ -1,6 +1,0 @@
-# Array iteration test
-print("Testing array iteration:")
-numbers = [1, 2, 3]
-for num in numbers:
-    print("Number:")
-    print(num)

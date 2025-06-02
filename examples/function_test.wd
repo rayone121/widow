@@ -1,8 +1,0 @@
-# Function test
-print("Testing function definition:")
-
-func greet():
-    print("Hello from function!")
-
-print("Function defined")
-greet()

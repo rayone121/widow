@@ -1,0 +1,40 @@
+# Array and HashMap Test - Widow Language
+print("=== ARRAY AND HASHMAP TEST ===")
+
+# Test arrays
+print("Testing arrays:")
+numbers = [1, 2, 3, 4, 5]
+print("Array created:")
+print(numbers)
+
+print("Accessing array elements:")
+first = numbers[0]
+print("First element:")
+print(first)
+
+third = numbers[2]
+print("Third element:")
+print(third)
+
+# Test hashmaps
+print("Testing hashmaps:")
+person = {"name": "Alice", "age": 30, "city": "New York"}
+print("HashMap created:")
+print(person)
+
+print("Accessing hashmap values:")
+name = person["name"]
+print("Name:")
+print(name)
+
+age = person["age"]
+print("Age:")
+print(age)
+
+# Mixed array
+print("Testing mixed array:")
+mixed = [1, "hello", true, 3.14]
+print("Mixed array:")
+print(mixed)
+
+print("=== ARRAY AND HASHMAP TEST COMPLETED ===")

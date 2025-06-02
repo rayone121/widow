@@ -1,0 +1,12 @@
+# Test variable assignments
+let x = 42
+let y = "hello"
+let z = true
+
+print("Testing variables...")
+print(x)
+print("x should be 42")
+print("y should be hello")
+print(y)
+print("z should be true")
+print(z)

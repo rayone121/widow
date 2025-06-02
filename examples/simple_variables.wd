@@ -1,0 +1,9 @@
+# Test simple variable assignments
+x = 42
+y = "hello"
+z = true
+
+print("Testing variables...")
+print(x)
+print(y)
+print(z)

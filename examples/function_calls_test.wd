@@ -1,0 +1,26 @@
+# Function calls test
+# Test basic function definition and calling
+
+func greet(name):
+    print("Hello, " + name + "!")
+
+func add(a, b):
+    x = a + b
+    print("Result: " + x)
+
+func factorial(n):
+    if n <= 1:
+        print("1")
+    else:
+        result = n * (n - 1)  # Simplified factorial (not recursive)
+        print("Factorial result: " + result)
+
+# Call the functions
+greet("World")
+greet("Widow")
+
+add(5, 3)
+add(10, 20)
+
+factorial(0)
+factorial(5)

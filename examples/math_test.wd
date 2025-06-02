@@ -1,0 +1,155 @@
+# Mathematical Expressions Test - Widow Language
+# Testing arithmetic, comparison, and logical operations
+
+print("=== MATHEMATICAL EXPRESSIONS TEST ===")
+
+# ========================================
+# 1. BASIC ARITHMETIC
+# ========================================
+print("1. Basic Arithmetic:")
+
+a = 10
+b = 5
+
+print("Variables:")
+print(a)
+print(b)
+
+addition = a + b
+print("Addition (10 + 5):")
+print(addition)
+
+subtraction = a - b
+print("Subtraction (10 - 5):")
+print(subtraction)
+
+multiplication = a * b
+print("Multiplication (10 * 5):")
+print(multiplication)
+
+division = a / b
+print("Division (10 / 5):")
+print(division)
+
+modulo = a % b
+print("Modulo (10 % 5):")
+print(modulo)
+
+# ========================================
+# 2. MIXED TYPE ARITHMETIC
+# ========================================
+print("2. Mixed Type Arithmetic:")
+
+int_val = 10
+float_val = 3.5
+
+mixed_add = int_val + float_val
+print("Int + Float (10 + 3.5):")
+print(mixed_add)
+
+mixed_mult = int_val * float_val
+print("Int * Float (10 * 3.5):")
+print(mixed_mult)
+
+# ========================================
+# 3. COMPARISON OPERATIONS
+# ========================================
+print("3. Comparison Operations:")
+
+x = 10
+y = 20
+
+equal = x == y
+print("10 == 20:")
+print(equal)
+
+not_equal = x != y
+print("10 != 20:")
+print(not_equal)
+
+less_than = x < y
+print("10 < 20:")
+print(less_than)
+
+greater_than = x > y
+print("10 > 20:")
+print(greater_than)
+
+less_equal = x <= y
+print("10 <= 20:")
+print(less_equal)
+
+greater_equal = x >= y
+print("10 >= 20:")
+print(greater_equal)
+
+# ========================================
+# 4. LOGICAL OPERATIONS
+# ========================================
+print("4. Logical Operations:")
+
+true_val = true
+false_val = false
+
+logical_and = true_val && false_val
+print("true && false:")
+print(logical_and)
+
+logical_or = true_val || false_val
+print("true || false:")
+print(logical_or)
+
+# ========================================
+# 5. PREFIX OPERATIONS
+# ========================================
+print("5. Prefix Operations:")
+
+positive_num = 42
+negative_num = -positive_num
+print("Negation (-42):")
+print(negative_num)
+
+bool_val = true
+negated_bool = !bool_val
+print("NOT true:")
+print(negated_bool)
+
+not_false = !false
+print("NOT false:")
+print(not_false)
+
+# ========================================
+# 6. STRING CONCATENATION
+# ========================================
+print("6. String Concatenation:")
+
+greeting = "Hello"
+target = "World"
+message = greeting + target
+print("String concatenation:")
+print(message)
+
+first_name = "John"
+last_name = "Doe"
+full_name = first_name + " " + last_name
+print("Full name:")
+print(full_name)
+
+# ========================================
+# 7. COMPLEX EXPRESSIONS
+# ========================================
+print("7. Complex Expressions:")
+
+result1 = 5 + 3 * 2
+print("5 + 3 * 2:")
+print(result1)
+
+result2 = (5 + 3) * 2
+print("(5 + 3) * 2 (if parentheses work):")
+print(result2)
+
+comparison_result = 10 > 5 && 20 < 30
+print("10 > 5 && 20 < 30:")
+print(comparison_result)
+
+print("=== MATHEMATICAL EXPRESSIONS TEST COMPLETED ===")

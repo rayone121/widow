@@ -1,0 +1,400 @@
+# Comprehensive Widow Language Test
+# This file demonstrates all major language features
+
+print("=== WIDOW LANGUAGE COMPREHENSIVE TEST ===")
+
+# ========================================
+# 1. VARIABLE ASSIGNMENTS & DATA TYPES
+# ========================================
+print("1. Testing Variable Assignments:")
+
+# Basic data types
+num = 42
+pi = 3.14159
+name = "Widow Programming Language"
+is_awesome = true
+letter = 'W'
+
+print("Integer:")
+print(num)
+print("Float:")
+print(pi)
+print("String:")
+print(name)
+print("Boolean:")
+print(is_awesome)
+print("Character:")
+print(letter)
+
+# Nil value
+empty_value = nil
+print("Nil value:")
+print(empty_value)
+
+# ========================================
+# 2. ARRAYS
+# ========================================
+print("2. Testing Arrays:")
+
+numbers = [1, 2, 3, 4, 5]
+print("Number array:")
+print(numbers)
+
+mixed_array = [42, "hello", true, 3.14]
+print("Mixed array:")
+print(mixed_array)
+
+# Empty array
+empty_array = []
+print("Empty array:")
+print(empty_array)
+
+# ========================================
+# 3. HASHMAPS
+# ========================================
+print("3. Testing HashMaps:")
+
+person = {
+    "name": "Alice",
+    "age": 30,
+    "city": "San Francisco"
+}
+print("Person hashmap:")
+print(person)
+
+# Empty hashmap
+empty_map = {}
+print("Empty hashmap:")
+print(empty_map)
+
+# ========================================
+# 4. MATHEMATICAL EXPRESSIONS
+# ========================================
+print("4. Testing Mathematical Expressions:")
+
+a = 10
+b = 5
+
+addition = a + b
+subtraction = a - b
+multiplication = a * b
+division = a / b
+modulo = a % b
+
+print("Addition (10 + 5):")
+print(addition)
+print("Subtraction (10 - 5):")
+print(subtraction)
+print("Multiplication (10 * 5):")
+print(multiplication)
+print("Division (10 / 5):")
+print(division)
+print("Modulo (10 % 5):")
+print(modulo)
+
+# ========================================
+# 5. COMPARISON OPERATIONS
+# ========================================
+print("5. Testing Comparison Operations:")
+
+x = 10
+y = 20
+
+print("x == y:")
+print(x == y)
+print("x != y:")
+print(x != y)
+print("x < y:")
+print(x < y)
+print("x > y:")
+print(x > y)
+print("x <= y:")
+print(x <= y)
+print("x >= y:")
+print(x >= y)
+
+# ========================================
+# 6. LOGICAL OPERATIONS
+# ========================================
+print("6. Testing Logical Operations:")
+
+true_val = true
+false_val = false
+
+print("true && false:")
+print(true_val && false_val)
+print("true || false:")
+print(true_val || false_val)
+print("!true:")
+print(!true_val)
+print("!false:")
+print(!false_val)
+
+# ========================================
+# 7. CONTROL FLOW - IF/ELSE
+# ========================================
+print("7. Testing Control Flow (If/Else):")
+
+score = 85
+
+if score >= 90:
+    print("Grade: A")
+else:
+    if score >= 80:
+        print("Grade: B")
+    else:
+        if score >= 70:
+            print("Grade: C")
+        else:
+            print("Grade: F")
+
+# Boolean conditions
+is_student = true
+has_discount = false
+
+if is_student && !has_discount:
+    print("Student without discount")
+else:
+    print("Not a student or has discount")
+
+# ========================================
+# 8. LOOPS
+# ========================================
+print("8. Testing Loops:")
+
+# For loop with range
+print("For loop (range):")
+for i in range(3):
+    print("Iteration:")
+    print(i)
+
+# For loop with array
+print("For loop (array iteration):")
+fruits = ["apple", "banana", "orange"]
+for fruit in fruits:
+    print("Fruit:")
+    print(fruit)
+
+# While loop
+print("While loop:")
+counter = 0
+while counter < 3:
+    print("Counter:")
+    print(counter)
+    counter = counter + 1
+
+# ========================================
+# 9. FUNCTIONS
+# ========================================
+print("9. Testing Functions:")
+
+# Function definition
+func greet(name):
+    print("Hello, ")
+    print(name)
+    print("!")
+
+# Function with return value
+func add_numbers(a, b):
+    return a + b
+
+# Function with multiple parameters
+func calculate_area(length, width):
+    area = length * width
+    return area
+
+# Function calls
+print("Function calls:")
+greet("World")
+greet("Widow")
+
+result = add_numbers(15, 25)
+print("15 + 25 =")
+print(result)
+
+area = calculate_area(5, 8)
+print("Area (5 * 8) =")
+print(area)
+
+# Recursive function
+func factorial(n):
+    if n <= 1:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+fact_result = factorial(5)
+print("Factorial of 5:")
+print(fact_result)
+
+# ========================================
+# 10. STRUCTS
+# ========================================
+print("10. Testing Structs:")
+
+# Struct definition
+struct Point:
+    x: i32
+    y: i32
+
+# Struct initialization
+point1 = Point { x: 10, y: 20 }
+point2 = Point { x: 5, y: 15 }
+
+print("Point 1:")
+print(point1)
+print("Point 2:")
+print(point2)
+
+# Struct with methods
+struct Rectangle:
+    width: f64
+    height: f64
+
+impl Rectangle:
+    func area(self):
+        return self.width * self.height
+    
+    func perimeter(self):
+        return 2 * (self.width + self.height)
+
+# Using struct methods
+rect = Rectangle { width: 10.0, height: 5.0 }
+rect_area = rect.area()
+rect_perimeter = rect.perimeter()
+
+print("Rectangle area:")
+print(rect_area)
+print("Rectangle perimeter:")
+print(rect_perimeter)
+
+# ========================================
+# 11. SWITCH STATEMENTS
+# ========================================
+print("11. Testing Switch Statements:")
+
+day = 3
+
+switch day:
+    case 1:
+        print("Monday")
+    case 2:
+        print("Tuesday")
+    case 3:
+        print("Wednesday")
+    case 4:
+        print("Thursday")
+    case 5:
+        print("Friday")
+    case 6, 7:
+        print("Weekend")
+    default:
+        print("Invalid day")
+
+# ========================================
+# 12. COMPLEX DATA STRUCTURES
+# ========================================
+print("12. Testing Complex Data Structures:")
+
+# Nested arrays
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+print("Matrix:")
+print(matrix)
+
+# Array of hashmaps
+students = [
+    {"name": "Alice", "grade": 95},
+    {"name": "Bob", "grade": 87},
+    {"name": "Charlie", "grade": 92}
+]
+print("Students:")
+print(students)
+
+# Hashmap with arrays
+courses = {
+    "math": [90, 85, 92],
+    "science": [88, 91, 87],
+    "english": [95, 89, 93]
+}
+print("Courses:")
+print(courses)
+
+# ========================================
+# 13. INDEXING AND MEMBER ACCESS
+# ========================================
+print("13. Testing Indexing and Member Access:")
+
+# Array indexing
+first_number = numbers[0]
+print("First number:")
+print(first_number)
+
+# HashMap member access
+person_name = person["name"]
+print("Person name:")
+print(person_name)
+
+# Struct member access
+point_x = point1.x
+print("Point x coordinate:")
+print(point_x)
+
+# ========================================
+# 14. ADVANCED FUNCTION FEATURES
+# ========================================
+print("14. Testing Advanced Function Features:")
+
+# Function with default parameters (if supported)
+func create_user(name, age, active):
+    user = {
+        "name": name,
+        "age": age,
+        "active": active
+    }
+    return user
+
+# Higher-order functions (if supported)
+func apply_operation(a, b, operation):
+    return operation(a, b)
+
+func multiply(x, y):
+    return x * y
+
+user = create_user("John", 25, true)
+print("Created user:")
+print(user)
+
+# ========================================
+# 15. ERROR HANDLING AND EDGE CASES
+# ========================================
+print("15. Testing Edge Cases:")
+
+# Large numbers
+big_number = 999999999999
+print("Big number:")
+print(big_number)
+
+# Empty string
+empty_string = ""
+print("Empty string:")
+print(empty_string)
+
+# String with special characters
+special_string = "Hello\nWorld\tTab\"Quote"
+print("Special string:")
+print(special_string)
+
+# Multiple return values (if supported)
+func get_coordinates():
+    return 100, 200
+
+x_coord, y_coord = get_coordinates()
+print("Coordinates:")
+print(x_coord)
+print(y_coord)
+
+print("=== COMPREHENSIVE TEST COMPLETED ===")
